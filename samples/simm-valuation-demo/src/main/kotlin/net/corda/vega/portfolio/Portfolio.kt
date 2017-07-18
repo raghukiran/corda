@@ -5,9 +5,9 @@ import net.corda.core.contracts.*
 import net.corda.core.identity.Party
 import net.corda.core.messaging.CordaRPCOps
 import net.corda.core.node.ServiceHub
-import net.corda.core.sum
 import net.corda.vega.contracts.IRSState
 import net.corda.vega.contracts.SwapData
+import java.math.BigDecimal
 import java.time.LocalDate
 
 /**
@@ -22,7 +22,9 @@ data class Portfolio(private val tradeStateAndRefs: List<StateAndRef<IRSState>>,
     val swaps: List<SwapData> by lazy { trades.map { it.swap } }
     val refs: List<StateRef> by lazy { tradeStateAndRefs.map { it.ref } }
 
-    fun getNotionalForParty(party: Party) = trades.map { it.swap.getLegForParty(party).notional }.sum()
+    fun getNotionalForParty(party: Party): BigDecimal {
+        return trades.map { it.swap.getLegForParty(party).notional }.fold(BigDecimal.ZERO) { a, b -> a + b }
+    }
 
     fun update(curTrades: List<StateAndRef<IRSState>>): Portfolio {
         return copy(tradeStateAndRefs = curTrades)

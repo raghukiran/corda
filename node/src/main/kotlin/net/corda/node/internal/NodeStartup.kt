@@ -8,6 +8,7 @@ import net.corda.core.crypto.commonName
 import net.corda.core.crypto.orgName
 import net.corda.core.internal.createDirectories
 import net.corda.core.internal.div
+import net.corda.core.internal.rootCause
 import net.corda.node.VersionInfo
 import net.corda.core.node.services.ServiceInfo
 import net.corda.core.internal.Emoji

@@ -1,6 +1,6 @@
 package net.corda.client.rpc.internal
 
-import net.corda.core.logElapsedTime
+import net.corda.core.internal.logElapsedTime
 import net.corda.core.messaging.RPCOps
 import net.corda.core.utilities.minutes
 import net.corda.core.crypto.random63BitValue

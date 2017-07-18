@@ -12,6 +12,12 @@ import kotlin.reflect.KProperty
 // is also relevant to Java then put it in Utils.kt.
 //
 
+/** Like the + operator but throws [ArithmeticException] in case of integer overflow. */
+infix fun Int.exactAdd(b: Int): Int = Math.addExact(this, b)
+
+/** Like the + operator but throws [ArithmeticException] in case of integer overflow. */
+infix fun Long.exactAdd(b: Long): Long = Math.addExact(this, b)
+
 /**
  * Get the [Logger] for a class using the syntax
  *

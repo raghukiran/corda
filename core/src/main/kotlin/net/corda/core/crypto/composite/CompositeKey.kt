@@ -6,6 +6,7 @@ import net.corda.core.crypto.keys
 import net.corda.core.crypto.provider.CordaObjectIdentifier
 import net.corda.core.crypto.toSHA256Bytes
 import net.corda.core.crypto.toStringShort
+import net.corda.core.utilities.exactAdd
 import net.corda.core.serialization.CordaSerializable
 import org.bouncycastle.asn1.*
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier
@@ -127,7 +128,7 @@ class CompositeKey private constructor(val threshold: Int, children: List<NodeAn
         var sum = 0
         for ((_, weight) in children) {
             require(weight > 0) { "Non-positive weight: $weight detected." }
-            sum = Math.addExact(sum, weight) // Add and check for integer overflow.
+            sum = sum exactAdd weight // Add and check for integer overflow.
         }
         return sum
     }
